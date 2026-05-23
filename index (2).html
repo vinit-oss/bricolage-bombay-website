@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bricolage Bombay — Residential SOP Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --ink-soft: #3d342a;
+    --paper: #f4ede1;
+    --paper-warm: #ebe2d2;
+    --paper-deep: #e0d4bf;
+    --terracotta: #b85838;
+    --terracotta-deep: #8a3d22;
+    --sage: #6b7551;
+    --gold: #b08940;
+    --line: #c9bca3;
+    --rule: #1a1612;
+    --serif: 'Fraunces', 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(244, 237, 225, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+
+  .nav-brand span {
+    font-style: normal;
+    font-weight: 400;
+    margin-left: 6px;
+    color: var(--ink-soft);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover { opacity: 0.5; }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    nav { padding: 14px 24px; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(184, 88, 56, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 6vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+
+  .hero-lede {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 48px;
+    font-weight: 400;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+    max-width: 540px;
+  }
+
+  .hero-meta-item {
+    font-size: 12px;
+  }
+
+  .hero-meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 10px;
+  }
+
+  .hero-meta-value {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* Hero visual — architectural plan reference */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-visual svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .visual-tag {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .visual-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--ink-soft);
+  }
+  .visual-corner.tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+  .visual-corner.tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+  .visual-corner.bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+  .visual-corner.br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+  @media (max-width: 1100px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 60px;
+      padding: 110px 24px 60px;
+    }
+    .hero-visual { max-width: 500px; }
+  }
+
+  /* ============ SECTION FOUNDATIONS ============ */
+  section {
+    padding: 120px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  @media (max-width: 700px) {
+    section { padding: 80px 24px; }
+  }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .section-eyebrow .num {
+    font-family: var(--mono);
+    color: var(--ink-soft);
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(38px, 4.8vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+    max-width: 900px;
+  }
+
+  .section-title em { font-style: italic; color: var(--terracotta); font-weight: 400; }
+
+  .section-lede {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 64px;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .divider-mark {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ THREE VERSIONS ============ */
+  .versions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .version-card {
+    background: var(--paper);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.4s ease;
+  }
+
+  .version-card:hover { background: var(--paper-warm); }
+
+  .version-num {
+    font-family: var(--serif);
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--terracotta);
+    font-style: italic;
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+  }
+
+  .version-tag {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .version-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.015em;
+  }
+
+  .version-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .version-attrs {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .version-attr {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .version-attr-label {
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .version-attr-value {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-size: 11px;
+  }
+
+  @media (max-width: 900px) {
+    .versions-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ STAGES — TIMELINE ============ */
+  #stages { background: var(--paper-warm); margin: 0; max-width: none; padding-left: 0; padding-right: 0; }
+  .stages-inner { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+  .stages-timeline {
+    position: relative;
+    margin-top: 64px;
+  }
+
+  .stage-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr;
+    gap: 40px;
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    position: relative;
+  }
+
+  .stage-row:last-child { border-bottom: none; }
+
+  .stage-letter {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--terracotta);
+    font-style: italic;
+    letter-spacing: -0.04em;
+  }
+
+  .stage-meta h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+
+  .stage-week {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+
+  .stage-meta p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .stage-checks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+  }
+
+  .stage-check {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .stage-check::before {
+    content: '✓';
+    color: var(--terracotta);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  .stage-check span {
+    color: var(--ink-soft);
+  }
+
+  .stage-check strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stage-gate {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    line-height: 1.5;
+    border-left: 3px solid var(--terracotta);
+  }
+
+  .stage-gate strong {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .stage-row { grid-template-columns: 1fr; gap: 20px; }
+    .stage-checks { grid-template-columns: 1fr; }
+    .stage-letter { font-size: 48px; }
+  }
+
+  /* ============ BHK COMPARISON ============ */
+  .bhk-table {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    overflow: hidden;
+  }
+
+  .bhk-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bhk-row:last-child { border-bottom: none; }
+
+  .bhk-cell {
+    padding: 22px 28px;
+    border-right: 1px solid var(--line);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  .bhk-cell:last-child { border-right: none; }
+
+  .bhk-row.head .bhk-cell {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    padding: 18px 28px;
+  }
+
+  .bhk-row.head .bhk-cell:first-child {
+    color: var(--terracotta);
+  }
+
+  .bhk-cell.label {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 15px;
+    background: var(--paper-warm);
+  }
+
+  .bhk-cell strong {
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 800px) {
+    .bhk-row { grid-template-columns: 1fr 1fr; }
+    .bhk-cell:nth-child(3), .bhk-cell:nth-child(4) { grid-column: span 1; }
+  }
+
+  /* ============ DELAY MATRIX ============ */
+  #delays { background: var(--ink); color: var(--paper); margin: 0; max-width: none; }
+  #delays .stages-inner { max-width: 1400px; margin: 0 auto; padding: 120px 40px; }
+  #delays .section-eyebrow { color: #d97a55; }
+  #delays .section-eyebrow::before { background: #d97a55; }
+  #delays .section-eyebrow .num { color: #a0958a; }
+  #delays .section-title { color: var(--paper); }
+  #delays .section-title em { color: #d97a55; }
+  #delays .section-lede { color: #b8aa97; }
+
+  .delay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2d2520;
+    border: 1px solid #2d2520;
+    margin-top: 32px;
+  }
+
+  .delay-card {
+    background: #1a1612;
+    padding: 28px 24px;
+    transition: background 0.3s ease;
+    cursor: default;
+    position: relative;
+  }
+
+  .delay-card:hover { background: #221c17; }
+
+  .delay-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #d97a55;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .delay-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    color: var(--paper);
+  }
+
+  .delay-mitigation {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #a0958a;
+  }
+
+  .delay-mitigation strong {
+    color: #d97a55;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 9px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 1000px) { .delay-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .delay-grid { grid-template-columns: 1fr; } }
+
+  /* ============ CLIENT JOURNEY ============ */
+  .journey {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .journey-narrative {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .journey-narrative p { margin-bottom: 22px; }
+
+  .journey-narrative p:first-letter {
+    font-family: var(--serif);
+    font-size: 64px;
+    line-height: 0.85;
+    float: left;
+    padding-right: 12px;
+    padding-top: 6px;
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+
+  .journey-phases {
+    border-top: 1px solid var(--ink);
+  }
+
+  .journey-phase {
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 20px;
+    align-items: baseline;
+  }
+
+  .journey-phase-letter {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .journey-phase h4 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .journey-phase p {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .journey-phase-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .journey { grid-template-columns: 1fr; gap: 40px; }
+    .journey-phase { grid-template-columns: 40px 1fr; }
+    .journey-phase-time { grid-column: 2; }
+  }
+
+  /* ============ TRACKER PREVIEW ============ */
+  #tracker { background: var(--paper-deep); margin: 0; max-width: none; }
+  #tracker .stages-inner { max-width: 1400px; margin: 0 auto; padding: 120px 40px; }
+
+  .tracker-mock {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    margin-top: 48px;
+    overflow: hidden;
+  }
+
+  .tracker-head {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  .tracker-head-title { font-family: var(--serif); font-size: 14px; letter-spacing: 0; text-transform: none; font-style: italic; }
+
+  .tracker-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+  }
+
+  .tracker-proj {
+    background: var(--paper);
+    padding: 24px;
+    position: relative;
+  }
+
+  .tracker-proj-name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .tracker-proj-code {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .tracker-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--paper-warm);
+  }
+
+  .tracker-stat:last-of-type { border-bottom: none; }
+
+  .tracker-stat-label { color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+  .tracker-stat-val { font-family: var(--mono); font-size: 11px; color: var(--ink); }
+
+  .flag {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .flag.green { background: #6b7551; }
+  .flag.yellow { background: #b08940; }
+  .flag.red { background: #b85838; }
+
+  .flag-label {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 500;
+  }
+
+  .flag-label.green { color: #6b7551; }
+  .flag-label.yellow { color: #b08940; }
+  .flag-label.red { color: #b85838; }
+
+  @media (max-width: 1000px) {
+    .tracker-projects { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .tracker-projects { grid-template-columns: 1fr; }
+  }
+
+  /* ============ DOWNLOAD ============ */
+  #download {
+    background: var(--ink);
+    color: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 0;
+  }
+
+  #download-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    text-align: center;
+  }
+
+  #download .section-title { color: var(--paper); }
+  #download .section-title em { color: #d97a55; }
+  #download .section-eyebrow { color: #d97a55; justify-content: center; }
+  #download .section-eyebrow::before { background: #d97a55; }
+  #download .section-eyebrow .num { color: #a0958a; }
+
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2d2520;
+    border: 1px solid #2d2520;
+    margin-top: 64px;
+  }
+
+  .download-card {
+    background: #1a1612;
+    padding: 40px 32px;
+    text-align: left;
+    transition: background 0.3s ease;
+  }
+
+  .download-card:hover { background: #221c17; }
+
+  .download-card h4 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  .download-card p {
+    font-size: 13px;
+    color: #a0958a;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #d97a55;
+    color: var(--ink);
+    padding: 14px 24px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.2s ease;
+  }
+
+  .download-btn:hover {
+    background: var(--paper);
+    transform: translateX(2px);
+  }
+
+  .download-btn::after {
+    content: '↓';
+    font-size: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .download-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 40px;
+    border-top: 1px solid #2d2520;
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .footer-meta {
+    font-size: 11px;
+    color: #a0958a;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ============ FLOATING TOC ============ */
+  .toc {
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 18px;
+    border-radius: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toc:hover { background: var(--terracotta); border-color: var(--terracotta); }
+  @media (max-width: 700px) { .toc { display: none; } }
+
+  /* ============ ANIMATIONS ============ */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Print */
+  @media print {
+    nav, .toc, #download { display: none; }
+    section { page-break-inside: avoid; padding: 30px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-brand">Bricolage<span>Bombay · SOP</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#versions">Versions</a></li>
+    <li><a href="#stages">Stages</a></li>
+    <li><a href="#delays">Delays</a></li>
+    <li><a href="#client">Client</a></li>
+    <li><a href="#tracker">Tracker</a></li>
+    <li><a href="#download">Download</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="overview" style="max-width:1600px">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Standard Operating Procedure · 2026</div>
+    <h1>The Residential <em>Delivery System</em>, codified.</h1>
+    <p class="hero-lede">A three-document operational framework for Maison Bricolage 2, 3 and 4 BHK projects, executed on a Design + PMC mandate by a single Lead Designer across 4 to 6 months — built on the studio's existing Notion and Drive estate.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Phases</div>
+        <div class="hero-meta-value">A → F</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Documents</div>
+        <div class="hero-meta-value">Three</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Cadence</div>
+        <div class="hero-meta-value">Weekly</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <span class="visual-corner tl"></span>
+    <span class="visual-corner tr"></span>
+    <span class="visual-corner bl"></span>
+    <span class="visual-corner br"></span>
+    <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
+      <!-- Architectural floor plan illustration -->
+      <defs>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#1a1612" stroke-width="0.5" opacity="0.15"/>
+        </pattern>
+        <pattern id="dots" patternUnits="userSpaceOnUse" width="8" height="8">
+          <circle cx="2" cy="2" r="0.5" fill="#1a1612" opacity="0.3"/>
+        </pattern>
+      </defs>
+      <!-- Outer walls -->
+      <rect x="40" y="40" width="320" height="420" fill="none" stroke="#1a1612" stroke-width="3"/>
+      <rect x="44" y="44" width="312" height="412" fill="url(#dots)" opacity="0.4"/>
+
+      <!-- Living -->
+      <rect x="40" y="40" width="180" height="180" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="55" y="65" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#1a1612">Living</text>
+      <text x="55" y="78" font-family="JetBrains Mono, monospace" font-size="7" fill="#3d342a" opacity="0.6">14' × 14'</text>
+
+      <!-- Furniture marks -->
+      <rect x="60" y="100" width="100" height="40" fill="url(#hatch)" stroke="#1a1612" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="25" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="3" fill="#b85838"/>
+
+      <!-- Kitchen -->
+      <rect x="220" y="40" width="140" height="120" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="232" y="65" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#1a1612">Kitchen</text>
+      <text x="232" y="78" font-family="JetBrains Mono, monospace" font-size="7" fill="#3d342a" opacity="0.6">10' × 9'</text>
+      <line x1="220" y1="90" x2="360" y2="90" stroke="#1a1612" stroke-width="0.5"/>
+      <line x1="220" y1="100" x2="360" y2="100" stroke="#1a1612" stroke-width="0.3"/>
+
+      <!-- Master Bedroom -->
+      <rect x="40" y="220" width="180" height="160" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="55" y="245" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#1a1612">Master BR</text>
+      <text x="55" y="258" font-family="JetBrains Mono, monospace" font-size="7" fill="#3d342a" opacity="0.6">12' × 13'</text>
+      <rect x="80" y="290" width="80" height="60" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+      <line x1="80" y1="290" x2="160" y2="350" stroke="#1a1612" stroke-width="0.3"/>
+
+      <!-- Bedroom 2 -->
+      <rect x="220" y="160" width="140" height="140" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="232" y="185" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#1a1612">BR-02</text>
+      <text x="232" y="198" font-family="JetBrains Mono, monospace" font-size="7" fill="#3d342a" opacity="0.6">10' × 11'</text>
+
+      <!-- Bath -->
+      <rect x="220" y="300" width="70" height="80" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="226" y="320" font-family="Fraunces, serif" font-size="9" font-style="italic" fill="#1a1612">Bath</text>
+      <circle cx="245" cy="345" r="8" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+
+      <!-- Bath 2 -->
+      <rect x="290" y="300" width="70" height="80" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="296" y="320" font-family="Fraunces, serif" font-size="9" font-style="italic" fill="#1a1612">Bath</text>
+
+      <!-- Foyer -->
+      <rect x="40" y="380" width="320" height="80" fill="none" stroke="#1a1612" stroke-width="1"/>
+      <text x="55" y="405" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#1a1612">Foyer</text>
+
+      <!-- Door swings -->
+      <path d="M 180 380 A 30 30 0 0 0 210 410" fill="none" stroke="#1a1612" stroke-width="0.4" stroke-dasharray="2,2"/>
+      <path d="M 220 380 A 25 25 0 0 1 245 405" fill="none" stroke="#1a1612" stroke-width="0.4" stroke-dasharray="2,2"/>
+
+      <!-- Title card -->
+      <g transform="translate(40, 472)">
+        <text font-family="JetBrains Mono, monospace" font-size="7" fill="#1a1612" opacity="0.5">SHEET ID-1-101 · IFA · DDv1</text>
+      </g>
+
+      <!-- Compass -->
+      <g transform="translate(335, 432)">
+        <circle cx="0" cy="0" r="10" fill="none" stroke="#1a1612" stroke-width="0.5"/>
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="#1a1612" stroke-width="0.5"/>
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="#1a1612" stroke-width="0.5"/>
+        <text x="0" y="-13" font-family="Fraunces, serif" font-size="7" fill="#b85838" text-anchor="middle">N</text>
+      </g>
+    </svg>
+    <div class="visual-tag">2 BHK Reference Plan</div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">i.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ THREE VERSIONS ============ -->
+<section id="versions">
+  <div class="section-eyebrow"><span class="num">01 / 06</span>The Three Documents</div>
+  <h2 class="section-title">Three documents. <em>One nervous system.</em></h2>
+  <p class="section-lede">The suite operates as a single instrument with three faces — operational depth for the Lead Designer, calm clarity for the client, and weekly visibility for studio leadership. Each lives in its own home, reads in minutes, and updates from the same source of truth.</p>
+
+  <div class="versions-grid">
+    <div class="version-card fade-in">
+      <div class="version-num">i</div>
+      <div class="version-tag">In-house · Master</div>
+      <h3 class="version-title">Lead Designer's Playbook</h3>
+      <p class="version-desc">Stage-by-stage operational checklist with every micro-step, owner, and delay-risk tag. The bible the LD reads line-by-line on every project. Six phases, twenty-one delay causes mapped to mitigation, BHK-differentiated complexity tables.</p>
+      <div class="version-attrs">
+        <div class="version-attr"><span class="version-attr-label">Audience</span><span class="version-attr-value">LD / PA / PM</span></div>
+        <div class="version-attr"><span class="version-attr-label">Format</span><span class="version-attr-value">Notion + PDF</span></div>
+        <div class="version-attr"><span class="version-attr-label">Length</span><span class="version-attr-value">~30 pages</span></div>
+      </div>
+    </div>
+
+    <div class="version-card fade-in">
+      <div class="version-num">ii</div>
+      <div class="version-tag">Client-Facing · Calm</div>
+      <h3 class="version-title">Your Maison Bricolage Journey</h3>
+      <p class="version-desc">A premium, jargon-free walkthrough of the six phases, payment milestones, approval cadence and shared responsibilities. Sets expectations honestly. Reduces friction. Reads in eight minutes.</p>
+      <div class="version-attrs">
+        <div class="version-attr"><span class="version-attr-label">Audience</span><span class="version-attr-value">Client</span></div>
+        <div class="version-attr"><span class="version-attr-label">Format</span><span class="version-attr-value">Printed + PDF</span></div>
+        <div class="version-attr"><span class="version-attr-label">Shared</span><span class="version-attr-value">At kickoff</span></div>
+      </div>
+    </div>
+
+    <div class="version-card fade-in">
+      <div class="version-num">iii</div>
+      <div class="version-tag">Studio · Pulse</div>
+      <h3 class="version-title">Weekly Progress Tracker</h3>
+      <p class="version-desc">A 32-column Notion database with auto-flag rules. Filled by every LD before Monday 7AM, scanned by leadership in 40 minutes, surfacing red projects before lunch. Five escalation paths from designer overload to civil surprise.</p>
+      <div class="version-attrs">
+        <div class="version-attr"><span class="version-attr-label">Audience</span><span class="version-attr-value">Leadership</span></div>
+        <div class="version-attr"><span class="version-attr-label">Cadence</span><span class="version-attr-value">Mon 07:00 IST</span></div>
+        <div class="version-attr"><span class="version-attr-label">Columns</span><span class="version-attr-value">32 fields</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">ii.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ STAGES ============ -->
+<section id="stages">
+  <div class="stages-inner">
+    <div class="section-eyebrow"><span class="num">02 / 06</span>The Six Phases</div>
+    <h2 class="section-title">From discovery <em>to handover.</em></h2>
+    <p class="section-lede">Six phases, each ending in a hard approval gate. No phase begins until its predecessor's gate is signed, paid, and logged in the Decisions Database. This is the spine that holds 4 to 6 months together.</p>
+
+    <div class="stages-timeline">
+
+      <!-- A -->
+      <div class="stage-row">
+        <div class="stage-letter">A</div>
+        <div class="stage-meta">
+          <h3>Discovery & Onboarding</h3>
+          <span class="stage-week">Wk 0 — 2</span>
+          <p>Qualify, listen, measure, contract. The phase that prevents 70% of downstream surprises by surfacing reality early — site condition, decision dynamics, real budget, real deadline.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>Inquiry logged</strong> in Sales DB within 24 hrs with source tag.</span></div>
+            <div class="stage-check"><span><strong>Qualification call</strong> scheduled within 72 hrs · 7 questions, 15 min.</span></div>
+            <div class="stage-check"><span><strong>Discovery meeting</strong> with questionnaire pre-sent 48 hrs prior.</span></div>
+            <div class="stage-check"><span><strong>Site survey</strong> with 60–120 photos · hidden-condition flags.</span></div>
+            <div class="stage-check"><span><strong>Society pre-check</strong> · NOC tracker row created same day.</span></div>
+            <div class="stage-check"><span><strong>Project brief</strong> signed off via email · Decisions Log entry.</span></div>
+            <div class="stage-check"><span><strong>DSA executed</strong> · BB/RES/YYYY/NNN issued · ₹500 e-stamp.</span></div>
+            <div class="stage-check"><span><strong>20% retainer</strong> received before any design work begins.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate A</strong>
+            Signed DSA + 20% retainer received + Brief signed-off + Society NOC Tracker row created. Without all four, do not proceed.
+          </div>
+        </div>
+      </div>
+
+      <!-- B -->
+      <div class="stage-row">
+        <div class="stage-letter">B</div>
+        <div class="stage-meta">
+          <h3>Concept Design</h3>
+          <span class="stage-week">Wk 3 — 4</span>
+          <p>Mood, layout, materiality. Two layouts for 2 BHK, three for 3/4 BHK — never more, never fewer. Constrain choice; prevent paralysis.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>Concept deck</strong> built in CD format · narrative, mood, materiality.</span></div>
+            <div class="stage-check"><span><strong>Layout options</strong> with rationale + trade-off summaries.</span></div>
+            <div class="stage-check"><span><strong>Materiality palette</strong> referencing real Indian brands.</span></div>
+            <div class="stage-check"><span><strong>In-studio presentation</strong> — never over WhatsApp.</span></div>
+            <div class="stage-check"><span><strong>Revisions capped</strong> at R2 (2 BHK) / R3 (3/4 BHK).</span></div>
+            <div class="stage-check"><span><strong>Email sign-off</strong> with explicit acknowledgement language.</span></div>
+            <div class="stage-check"><span><strong>Decisions Log</strong> entry with PDF hash, revision number.</span></div>
+            <div class="stage-check"><span><strong>Payment 2 (20%)</strong> invoice issued same day.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate B</strong>
+            Concept sign-off email received + Payment 2 received + Materiality direction frozen.
+          </div>
+        </div>
+      </div>
+
+      <!-- C -->
+      <div class="stage-row">
+        <div class="stage-letter">C</div>
+        <div class="stage-meta">
+          <h3>Design Development</h3>
+          <span class="stage-week">Wk 5 — 8/12</span>
+          <p>Eight sub-stages, each with its own approval. Floor plans, ceiling plans, electrical, plumbing, HVAC, 3D, samples, joinery details — sequenced and signed off in order, never as one block.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>Working floor plans</strong> at 1:50 with 25mm tolerance.</span></div>
+            <div class="stage-check"><span><strong>RCP with beam overlay</strong> — clashes resolved before issue.</span></div>
+            <div class="stage-check"><span><strong>Switchboard schedule</strong> sheet — prevents 80% of point snags.</span></div>
+            <div class="stage-check"><span><strong>3D renders</strong> for high-stakes spaces only · 6/9-10/12-14.</span></div>
+            <div class="stage-check"><span><strong>Render disclaimer slide</strong> in every render PDF.</span></div>
+            <div class="stage-check"><span><strong>Physical samples</strong> · Approved Samples Log row each.</span></div>
+            <div class="stage-check"><span><strong>Mockup boards</strong> 2'×2' for PU shade and paint sheen.</span></div>
+            <div class="stage-check"><span><strong>5-day rule</strong> on every sample approval, written escalation thereafter.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate C</strong>
+            All Annexure A DD-stage rows ticked + Approved Samples Log >95% complete + Payment 3 (25%) received.
+          </div>
+        </div>
+      </div>
+
+      <!-- D -->
+      <div class="stage-row">
+        <div class="stage-letter">D</div>
+        <div class="stage-meta">
+          <h3>Documentation & BOQ</h3>
+          <span class="stage-week">Wk 8 — 10/12</span>
+          <p>GFC drawings issued, BOQ prepared and approved, drawing register populated. The phase where Procurement Schedule is born and the top-3 long-lead items are flagged for the entire project.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>GFC set issued</strong> · ~50 / 75 / 100 sheets by BHK.</span></div>
+            <div class="stage-check"><span><strong>Drawing Register</strong> populated with IFC status per sheet.</span></div>
+            <div class="stage-check"><span><strong>BOQ format chosen</strong> — Format A room-wise / Format B trade-wise.</span></div>
+            <div class="stage-check"><span><strong>18-category tree</strong> visited including 5–8% contingency.</span></div>
+            <div class="stage-check"><span><strong>Internal QC</strong> by PM and PA before client share.</span></div>
+            <div class="stage-check"><span><strong>BOQ presentation</strong> in person — explain 3 drivers, 3 levers.</span></div>
+            <div class="stage-check"><span><strong>Revision rounds capped</strong> at 2 / 2 / 3 by BHK.</span></div>
+            <div class="stage-check"><span><strong>Optimisation Sheet</strong> ready · KEEP/TRIM/CUT colour codes.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate D</strong>
+            GFC set issued (ISS-01) + BOQ approved + Payment 4 (20%) received + Drawing Register fully populated.
+          </div>
+        </div>
+      </div>
+
+      <!-- E -->
+      <div class="stage-row">
+        <div class="stage-letter">E</div>
+        <div class="stage-meta">
+          <h3>Procurement & Execution</h3>
+          <span class="stage-week">Wk 8 — 17/24</span>
+          <p>13-step canonical execution sequence — out-of-sequence work is the #2 site-delay cause. Daily stand-ups, weekly site reports, change orders signed before any work proceeds.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>3 quotes minimum</strong> per major category · vendor onboarding form.</span></div>
+            <div class="stage-check"><span><strong>Procurement Schedule</strong> with order-by dates · 1-wk buffer.</span></div>
+            <div class="stage-check"><span><strong>Festival overlay</strong> · Ganpati / Diwali / Holi avoided.</span></div>
+            <div class="stage-check"><span><strong>Monsoon overlay</strong> · wet trades pre-monsoon, polish post.</span></div>
+            <div class="stage-check"><span><strong>Society NOC</strong> in hand before site mobilisation.</span></div>
+            <div class="stage-check"><span><strong>Trade walkthroughs</strong> · 6 trades, signed acknowledgement.</span></div>
+            <div class="stage-check"><span><strong>QC walks</strong> photo-documented at every stage close.</span></div>
+            <div class="stage-check"><span><strong>Change Order discipline</strong> — no verbal approvals, ever.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate E (rolling)</strong>
+            Each of 13 stages closes only when its QC walk passes, photos are filed, and the next stage's GRNs are in hand.
+          </div>
+        </div>
+      </div>
+
+      <!-- F -->
+      <div class="stage-row">
+        <div class="stage-letter">F</div>
+        <div class="stage-meta">
+          <h3>Snagging & Handover</h3>
+          <span class="stage-week">Wk 17 — 18/24</span>
+          <p>Two-pass snag walk, deep clean, styling, photoshoot, walkthrough, handover binder. The 12-month defects-liability period begins. 30/60/90-day reviews scheduled at handover, not later.</p>
+        </div>
+        <div>
+          <div class="stage-checks">
+            <div class="stage-check"><span><strong>Two-pass snag walk</strong> 2 weeks before handover.</span></div>
+            <div class="stage-check"><span><strong>Critical = 0</strong> · Major ≤ 5 · Minor ≤ 15 before client walk.</span></div>
+            <div class="stage-check"><span><strong>Deep clean</strong> by professional crew · every surface, hardware.</span></div>
+            <div class="stage-check"><span><strong>Styling install</strong> per pre-approved shot list.</span></div>
+            <div class="stage-check"><span><strong>Photoshoot</strong> within 7 days · 10–15 hero frames.</span></div>
+            <div class="stage-check"><span><strong>Handover binder</strong> · warranties, AMC, manuals, vendor contacts.</span></div>
+            <div class="stage-check"><span><strong>Lessons-Learned page</strong> drafted by LD · 1 page max.</span></div>
+            <div class="stage-check"><span><strong>30/60/90-day reviews</strong> scheduled at handover.</span></div>
+          </div>
+          <div class="stage-gate">
+            <strong>Approval Gate F</strong>
+            Handover acknowledgement signed + Payment 5 (15%) received + Project archived + Lessons reviewed at next Monday Weekly Task Review.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BHK Comparison -->
+    <h3 style="font-family:var(--serif); font-size:32px; font-weight:300; letter-spacing:-0.02em; margin-top:96px; margin-bottom:32px; font-style:italic;">Differential complexity by BHK</h3>
+    <div class="bhk-table">
+      <div class="bhk-row head">
+        <div class="bhk-cell">Parameter</div>
+        <div class="bhk-cell">2 BHK</div>
+        <div class="bhk-cell">3 BHK</div>
+        <div class="bhk-cell">4 BHK / Villa</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Carpet area</div>
+        <div class="bhk-cell"><strong>600–900</strong> sq ft</div>
+        <div class="bhk-cell"><strong>900–1,400</strong> sq ft</div>
+        <div class="bhk-cell"><strong>1,400–2,500</strong> sq ft</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Drawing-set size</div>
+        <div class="bhk-cell">~50–60 items</div>
+        <div class="bhk-cell">~70–80 items</div>
+        <div class="bhk-cell">~90–110 items</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Indicative all-in cost</div>
+        <div class="bhk-cell">₹7–18 L</div>
+        <div class="bhk-cell">₹16–35 L</div>
+        <div class="bhk-cell">₹35 L – 1.5 Cr+</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">End-to-end timeline</div>
+        <div class="bhk-cell"><strong>16–18</strong> weeks</div>
+        <div class="bhk-cell"><strong>20–22</strong> weeks</div>
+        <div class="bhk-cell"><strong>24–28</strong> weeks</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Concept rounds capped</div>
+        <div class="bhk-cell">2</div>
+        <div class="bhk-cell">3</div>
+        <div class="bhk-cell">3</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">BOQ revisions capped</div>
+        <div class="bhk-cell">2</div>
+        <div class="bhk-cell">2</div>
+        <div class="bhk-cell">3</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Site visits (E phase)</div>
+        <div class="bhk-cell">2× per week</div>
+        <div class="bhk-cell">3× per week</div>
+        <div class="bhk-cell">Daily + weekly review</div>
+      </div>
+      <div class="bhk-row">
+        <div class="bhk-cell label">Contingency mandated</div>
+        <div class="bhk-cell">8%</div>
+        <div class="bhk-cell">6%</div>
+        <div class="bhk-cell">5%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">iii.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ DELAYS ============ -->
+<section id="delays">
+  <div class="stages-inner">
+    <div class="section-eyebrow"><span class="num">03 / 06</span>Delay × Mitigation Matrix</div>
+    <h2 class="section-title">Twenty-one delay causes, <em>each pre-empted.</em></h2>
+    <p class="section-lede">Mumbai residential interiors rarely fail for one big reason — they slip through twenty small ones. The SOP names every common cause, ties it to the stage that prevents it, and lays down the escalation trigger and remediation path. Every checkbox above carries one of these tags.</p>
+
+    <div class="delay-grid">
+      <div class="delay-card"><div class="delay-num">D-01</div><div class="delay-title">Long-lead material delays</div><div class="delay-mitigation"><strong>Mitigation</strong>Procurement Schedule with order-by dates, 1-wk buffer, top-3 long-lead flagged at Stage 4 sign-off. Backup vendor activated by Day 7 of slip.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-02</div><div class="delay-title">BOQ approval lag from clients</div><div class="delay-mitigation"><strong>Mitigation</strong>BOQ presented in person with optimisation sheet ready. Revision rounds capped. Formal slippage letter issued at 7 working days unread.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-03</div><div class="delay-title">Mid-execution scope changes</div><div class="delay-mitigation"><strong>Mitigation</strong>Change Order discipline — no verbal approvals. Signed CO with cost and time impact before any work resumes. Running total visible weekly.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-04</div><div class="delay-title">Vendor reliability — quality, time</div><div class="delay-mitigation"><strong>Mitigation</strong>Vendor onboarding form, factory visit, two reference calls. Vendor agreement signed. Day-3 written escalation, Day-7 backup activation.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-05</div><div class="delay-title">Society restrictions — hours, lifts</div><div class="delay-mitigation"><strong>Mitigation</strong>Society NOC Tracker row created Day 1 of site visit. Submitted end of Stage 4. 9AM–6PM, no Sundays factored into schedule.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-06</div><div class="delay-title">Monsoon impact (June–Sept)</div><div class="delay-mitigation"><strong>Mitigation</strong>Wet trades sequenced pre-monsoon. Paint and PU reserved for post-monsoon Sept–Oct window. 15% schedule contingency added.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-07</div><div class="delay-title">Client decision lag on samples</div><div class="delay-mitigation"><strong>Mitigation</strong>5 working-day rule per sample. Samples dispatched in batches not one-by-one. Written escalation referencing day-for-day timeline impact.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-08</div><div class="delay-title">Client payment milestone delays</div><div class="delay-mitigation"><strong>Mitigation</strong>DSA terms enforced — 1.5%/month late fee. Vendor payments paused with disclosure to client at 14 days overdue.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-09</div><div class="delay-title">Civil surprises — load-bearing, seepage</div><div class="delay-mitigation"><strong>Mitigation</strong>Hidden-condition flags at site survey. Pre-demo photos. Structural certificate before any wall is touched. Stop-work protocol on discovery.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-10</div><div class="delay-title">Trade clashes — MEP / ceiling / carpentry</div><div class="delay-mitigation"><strong>Mitigation</strong>Beam-coordination overlay at C2. Switchboard schedule at C3. Trade-by-trade walkthroughs at site mobilisation, signed acknowledgement.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-11</div><div class="delay-title">Festival labour shortages</div><div class="delay-mitigation"><strong>Mitigation</strong>Festival overlay on Procurement Schedule. Never schedule criticals during Ganpati / Diwali / Holi ± 2 wks. Pre-festival schedule freeze.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-12</div><div class="delay-title">Society NOC delays</div><div class="delay-mitigation"><strong>Mitigation</strong>NOC Tracker started Day 1. Submitted end of Stage 4. Escalation to owner-member intervention if pending > 30 days non-structural.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-13</div><div class="delay-title">Quality issues requiring rework</div><div class="delay-mitigation"><strong>Mitigation</strong>QC anchors per stage. Mockup discipline for high-risk finishes — 2'×2' boards approved before bulk. Vendor-accountability clause.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-14</div><div class="delay-title">Sample approval delays</div><div class="delay-mitigation"><strong>Mitigation</strong>Same as D-07 — 5-day rule, batch dispatch, written escalation referencing day-for-day timeline impact.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-15</div><div class="delay-title">Custom fabrication errors</div><div class="delay-mitigation"><strong>Mitigation</strong>Hardware schedules with explicit Hettich/Häfele SKUs. GRN protocol — inspection before signing challan. Vendor rectifies at own cost.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-16</div><div class="delay-title">Festival vendor shutdowns</div><div class="delay-mitigation"><strong>Mitigation</strong>Orders placed pre-festival. Payments cleared pre-festival. Backup vendor on standby. Balance held until reopen.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-17</div><div class="delay-title">Client mind-changes after install</div><div class="delay-mitigation"><strong>Mitigation</strong>3D renders + walkthrough video for high-stakes spaces. Render disclaimer slide. Mockup discipline. Post-install changes are CO with full impact.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-18</div><div class="delay-title">LD juggling multiple projects</div><div class="delay-mitigation"><strong>Mitigation</strong>Studio capacity rule — 1 LD ≤ 3 active residential projects, ≤ 1 in execution. Monday Weekly Review monitors load. PA reassignment.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-19</div><div class="delay-title">Inadequate site supervision</div><div class="delay-mitigation"><strong>Mitigation</strong>Cadence baked in — 2× / 3× / daily by BHK. Weekly Site Visit Report mandatory. LD escalates own bandwidth proactively to PM.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-20</div><div class="delay-title">Communication gaps</div><div class="delay-mitigation"><strong>Mitigation</strong>Single LD = single SPOC. Written MOM after every meeting. Weekly SVR. Trade walkthroughs. Verbal-only changes trigger comms reset.</div></div>
+
+      <div class="delay-card"><div class="delay-num">D-21</div><div class="delay-title">Last-minute additions on site</div><div class="delay-mitigation"><strong>Mitigation</strong>CO discipline. LD never says yes on site. 3rd unsigned verbal request triggers formal CO before any work proceeds.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">iv.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ CLIENT JOURNEY ============ -->
+<section id="client">
+  <div class="section-eyebrow"><span class="num">04 / 06</span>The Client Version</div>
+  <h2 class="section-title">A calm, jargon-free walkthrough <em>for the client.</em></h2>
+  <p class="section-lede">Premium reassurance, set expectations honestly, share responsibility for what slows projects down. Eight minutes to read. Used at kickoff and referenced throughout.</p>
+
+  <div class="journey">
+    <div class="journey-narrative">
+      <p>A home is a deeply personal undertaking. This document explains exactly how we work together, what we'll need from you at each step, and how long things truly take in Mumbai. There are no surprises later because the surprises are named here, in advance.</p>
+      <p>Your project runs across six phases, in a roughly eighteen-week window for a 2 BHK, twenty-two weeks for a 3 BHK, and twenty-four to twenty-eight weeks for a 4 BHK — assuming we receive your approvals on time and the building society plays ball.</p>
+      <p>One Lead Designer owns your project end-to-end. Same person, first meeting to handover. You won't be passed between people. Vinit, our founder, signs off all drawings before they go to construction.</p>
+      <p>Approvals are the engine. Slow approvals stretch timelines more than any other single factor. We ask for a five working-day turnaround on every approval, and we track every decision in a shared Decisions Log so nothing is forgotten. Five payment milestones — twenty, twenty, twenty-five, twenty, fifteen — invoiced the same day we hit a milestone, payable within seven working days.</p>
+    </div>
+
+    <div class="journey-phases">
+      <div class="journey-phase">
+        <div class="journey-phase-letter">A</div>
+        <div>
+          <h4>Discovery & Brief</h4>
+          <p>Two meetings, lifestyle inputs, signed brief, 20% retainer.</p>
+        </div>
+        <div class="journey-phase-time">2 wks</div>
+      </div>
+      <div class="journey-phase">
+        <div class="journey-phase-letter">B</div>
+        <div>
+          <h4>Concept Design</h4>
+          <p>2–3 layout options, mood board, materiality, written approval. Pay 20%.</p>
+        </div>
+        <div class="journey-phase-time">2 wks</div>
+      </div>
+      <div class="journey-phase">
+        <div class="journey-phase-letter">C</div>
+        <div>
+          <h4>Design Development</h4>
+          <p>Drawings, 3D renders, samples. 5–6 small approvals, 5-day turnaround. Pay 25%.</p>
+        </div>
+        <div class="journey-phase-time">3–6 wks</div>
+      </div>
+      <div class="journey-phase">
+        <div class="journey-phase-letter">D</div>
+        <div>
+          <h4>Procurement & Pre-execution</h4>
+          <p>BOQ approval, vendor finalisation, society NOC. Pay 20% to start site.</p>
+        </div>
+        <div class="journey-phase-time">2–3 wks</div>
+      </div>
+      <div class="journey-phase">
+        <div class="journey-phase-letter">E</div>
+        <div>
+          <h4>Execution</h4>
+          <p>Site work in 13 stages. Weekly site review meeting. Daily site presence by your LD.</p>
+        </div>
+        <div class="journey-phase-time">9–18 wks</div>
+      </div>
+      <div class="journey-phase">
+        <div class="journey-phase-letter">F</div>
+        <div>
+          <h4>Snagging & Handover</h4>
+          <p>Two-pass snag walk, deep clean, styling, photoshoot, handover binder. Pay 15%.</p>
+        </div>
+        <div class="journey-phase-time">1–2 wks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">v.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ TRACKER PREVIEW ============ -->
+<section id="tracker">
+  <div class="stages-inner">
+    <div class="section-eyebrow"><span class="num">05 / 06</span>Studio Weekly Tracker</div>
+    <h2 class="section-title">Every Monday, <em>at a glance.</em></h2>
+    <p class="section-lede">Filled by every LD before 6:30 AM. Scanned by leadership at 7:00 AM. Auto-flag rules surface red projects in seconds. Recovery plans written by 8:00 AM. By Monday lunch, the studio knows where its bandwidth must go this week.</p>
+
+    <div class="tracker-mock">
+      <div class="tracker-head">
+        <div>MB · Weekly Tracker · 2026-W19</div>
+        <div class="tracker-head-title">Filled Mon 06:30 IST</div>
+      </div>
+      <div class="tracker-projects">
+
+        <div class="tracker-proj">
+          <div class="flag-label green"><span class="flag green"></span>Green</div>
+          <div class="tracker-proj-name">Shinde · Chandivali</div>
+          <div class="tracker-proj-code">BB/RES/2026/014 · 2 BHK</div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Phase</span><span class="tracker-stat-val">E.7 — Ceiling</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Complete</span><span class="tracker-stat-val">62%</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Next milestone</span><span class="tracker-stat-val">Carpentry · 14 May</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Procurement</span><span class="tracker-stat-val">88% ord · 71% del</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Snags O / M / Mi</span><span class="tracker-stat-val">0 / 4 / 11</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Client AR</span><span class="tracker-stat-val">Up to date</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">LD confidence</span><span class="tracker-stat-val">High</span></div>
+        </div>
+
+        <div class="tracker-proj">
+          <div class="flag-label yellow"><span class="flag yellow"></span>Yellow</div>
+          <div class="tracker-proj-name">Mehta · Bandra W</div>
+          <div class="tracker-proj-code">BB/RES/2026/011 · 3 BHK</div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Phase</span><span class="tracker-stat-val">D — BOQ</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Complete</span><span class="tracker-stat-val">38%</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Next milestone</span><span class="tracker-stat-val">BOQ approval</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">BOQ status</span><span class="tracker-stat-val">With client · 9d</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Snags O / M / Mi</span><span class="tracker-stat-val">— / — / —</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Client AR</span><span class="tracker-stat-val">Up to date</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">LD confidence</span><span class="tracker-stat-val">Medium</span></div>
+        </div>
+
+        <div class="tracker-proj">
+          <div class="flag-label red"><span class="flag red"></span>Red</div>
+          <div class="tracker-proj-name">Kapoor · Worli</div>
+          <div class="tracker-proj-code">BB/RES/2026/007 · 4 BHK</div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Phase</span><span class="tracker-stat-val">E.4 — Plumbing</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Complete</span><span class="tracker-stat-val">44% (-12 v plan)</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Next milestone</span><span class="tracker-stat-val">MEP rough-in · 7d late</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Long-lead risk</span><span class="tracker-stat-val">Italian marble -2w float</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">CO time impact</span><span class="tracker-stat-val">+22 days</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Client AR</span><span class="tracker-stat-val">17 days overdue</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">LD confidence</span><span class="tracker-stat-val">Low</span></div>
+        </div>
+
+        <div class="tracker-proj">
+          <div class="flag-label green"><span class="flag green"></span>Green</div>
+          <div class="tracker-proj-name">Iyer · Powai</div>
+          <div class="tracker-proj-code">BB/RES/2026/018 · 3 BHK</div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Phase</span><span class="tracker-stat-val">B — Concept</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Complete</span><span class="tracker-stat-val">14%</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Next milestone</span><span class="tracker-stat-val">Concept R1 · 12 May</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Procurement</span><span class="tracker-stat-val">— · —</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Snags O / M / Mi</span><span class="tracker-stat-val">— / — / —</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">Client AR</span><span class="tracker-stat-val">Up to date</span></div>
+          <div class="tracker-stat"><span class="tracker-stat-label">LD confidence</span><span class="tracker-stat-val">High</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:48px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px;">
+      <div>
+        <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px;">Auto-flag rule</div>
+        <div style="font-family:var(--serif); font-size:18px; line-height:1.4; font-weight:400;">Schedule -10 pts behind plan, BOQ unread &gt; 14 days, payment overdue &gt; 14 days, Society NOC missing entering Phase E — any one triggers <span style="color:var(--terracotta);">red</span>.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px;">Meeting choreography</div>
+        <div style="font-family:var(--serif); font-size:18px; line-height:1.4; font-weight:400;">Mon 06:30 fill-in. Mon 07:00 Weekly Task Review. Mon 08:00 Finances. Tue Ops Design Works in-studio.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px;">Escalation paths</div>
+        <div style="font-family:var(--serif); font-size:18px; line-height:1.4; font-weight:400;">Five named paths — designer overload, civil surprise, vendor crisis, payment overdue, three weeks consecutively red.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-mark">vi.</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============ DOWNLOAD ============ -->
+<section id="download">
+  <div id="download-inner">
+    <div class="section-eyebrow"><span class="num">06 / 06</span>Take it with you</div>
+    <h2 class="section-title">Download the <em>three documents.</em></h2>
+    <p class="section-lede" style="margin-left:auto; margin-right:auto;">Markdown + PDF-ready bundles for the studio. Every checkbox, every template, every escalation rule, ready to live inside Notion or print into a hardback.</p>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <h4>i. Lead Designer's Playbook</h4>
+        <p>The full master document — discovery to handover, all 21 delay-cause maps, BHK complexity tables, inline templates. ~30 pages.</p>
+        <button class="download-btn" data-doc="version1">Download Markdown</button>
+      </div>
+      <div class="download-card">
+        <h4>ii. Client Journey Document</h4>
+        <p>The premium, jargon-free version for clients. Six phases, payment milestones, shared responsibilities. ~6 pages.</p>
+        <button class="download-btn" data-doc="version2">Download Markdown</button>
+      </div>
+      <div class="download-card">
+        <h4>iii. Studio Weekly Tracker</h4>
+        <p>32-column Notion schema, auto-flag rules, meeting choreography, five escalation paths, parent dashboard KPIs. ~5 pages.</p>
+        <button class="download-btn" data-doc="version3">Download Markdown</button>
+      </div>
+    </div>
+    <div style="margin-top:48px;">
+      <button class="download-btn" data-doc="all" style="background:var(--paper); color:var(--ink); padding:18px 32px; font-size:12px;">Download Complete Suite (All Three)</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Bricolage Bombay <span style="font-style:normal; font-family:var(--sans); color:#a0958a; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; margin-left:12px;">Residential SOP · v1.0 · 2026</span></div>
+    <div class="footer-meta">301 Kesarkunj · Mumbai · India</div>
+  </div>
+</footer>
+
+<!-- TOC -->
+<a class="toc" href="#overview">▲ Top</a>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in, .stage-row, .delay-card, .version-card').forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
+  });
+
+  // Download triggers — files sit alongside index.html in same folder
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const doc = btn.getAttribute('data-doc');
+      const map = {
+        'version1': 'v1-lead-designer-playbook.md',
+        'version2': 'v2-client-journey.md',
+        'version3': 'v3-weekly-tracker.md',
+        'all': 'bricolage-sop-complete.md'
+      };
+      const file = map[doc];
+      if (file) {
+        const a = document.createElement('a');
+        a.href = file;
+        a.download = file;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    });
+  });
+</script>
+</body>
+</html>
